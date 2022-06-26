@@ -16180,6 +16180,13 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Answer: </strong></p>
 <p>By observing the plots, we can see that random forest classifier gets the highest scores on both accuracy and F-score while using the training set. However, it falls behind while using the testing set. Even though the accuracy scores are pretty close, F-score has a clear winner which is "Gradient Boosting Classifier".</p>
+<p>Gradient Boosting Classifier is suitable for this dataset because;</p>
+<ul>
+<li>We have a small dataset,</li>
+<li>We don't have many features,</li>
+<li>The data has "heterogenous" features.</li>
+</ul>
+<p>Also if we observer the plot from cell 8(seaborn pairplot), we can see that features are linearly separable.</p>
 
 </div>
 </div>
@@ -16209,9 +16216,24 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Answer: </strong></p>
 <p>In order to explain "Gradient Boosting Classifier", we need to understand decision trees and boosting.</p>
-<p>Decision Tree is simply a huge combination of nested "if/else" blocks. Each node on the tree represents a decision point for a "feature" in the data. For example, if our feature lies between 0 and 1; the node can be used to split the data which has this feature &gt;0.5 and &lt;= 0.5.</p>
-<p>Boosting could be explained as "specialized" workers who are only responsible of their speciality, but they don't see the final product. They try to make their part as good as possible.</p>
-<p>Gradient Boosting Classifier trains small decision trees(workers) and checks their mistakes/misclassifications then tries to build a better tree than the previous ones by changing their parameters. After an acceptable error rate is reached, the trees are combined into a single tree.</p>
+<p>Decision Tree is simply a huge combination of nested "if/else" blocks. Each node on the tree represents a decision point for a "feature" in the data.
+Decision(Classification) trees can be thought as staff who are responsible for deciding who can ride a rollercoaster. For simplicity let's just assume we only let people who are older than 8 years old and taller than 120 cm. One decision can be 
+A person wants to ride</p>
+<ul>
+<li>we first check their age, <ul>
+<li>if they're below 8, we don't let them pass, </li>
+<li>if they're above 8, we measure their height <ul>
+<li>if they're shorter than 120 cm we don't let them pass</li>
+<li>if they're taller than 120 cm we let them pass.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>In gradient boosting we also have the concept of "weak learners". Weak learners can be considered as "specialized" workers for specific a task, but not for the ultimate goal.
+Continuing the same example in the decision tree, we want to hire new staff but we don't tell the exact restrictions of the rollercoaster for some reason. At first all the candidates have to guess who can ride. Then some of them come up with a age limit to identify who can pass. Others may choose a height limit. Some can also combine two features and come up with an age and a height limit. This is better than guessing randomly since they weakly evaluate a customer.</p>
+<p>Gradient Boosting Classifier trains small decision trees(workers) and checks their mistakes/misclassifications then tries to build a better tree than the previous ones by changing their parameters. After an acceptable error rate is reached, the trees are combined into a single tree.
+To finish our example, we slightly "guide" our candidates based on our restrictions by rejecting or approving. After they predict, we also double check if conditions are met and keep a track of the employees error rate. Then we can choose train a candidate by giving him the reason why his prediction was wrong and see if he can improve. After we get an acceptable error rate, we may choose to keep one employee, who guesses based on two features (age and height), or two employees, one identifies correct age and one identifies the correct height requirement.</p>
 
 </div>
 </div>
